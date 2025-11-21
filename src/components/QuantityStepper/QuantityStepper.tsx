@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { ActionIcon, Badge, Group, useMantineTheme } from '@mantine/core';
 import {QuantityStepperProps} from "../../types/types.ts";
+import {MinusIcon} from "../Icons/MinusIcon.tsx";
+import {PlusIcon} from "../Icons/PlusIcon.tsx";
 
 export const QuantityStepper: React.FC<QuantityStepperProps> = ({
     value,
@@ -13,7 +15,7 @@ export const QuantityStepper: React.FC<QuantityStepperProps> = ({
     const [internalValue, setInternalValue] = React.useState<number>(value ?? 1);
 
     // Если значение приходит извне — синхронизируем
-    React.useEffect(() => {
+    useEffect(() => {
         if (value !== undefined) setInternalValue(value);
     }, [value]);
     // функция уменьшения
@@ -57,15 +59,7 @@ export const QuantityStepper: React.FC<QuantityStepperProps> = ({
                     },
                 }}
             >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="12"
-                    height="2"
-                    fill="none"
-                    style={{ display: 'block' }}
-                >
-                    <path fill={theme.colors.gray[10]} d="M0 2V0h12v2z" />
-                </svg>
+                <MinusIcon color={theme.colors.gray[10]} />
             </ActionIcon>
 
             <Badge variant="clear" data-testid="quantity-value">{internalValue}</Badge>
@@ -83,14 +77,7 @@ export const QuantityStepper: React.FC<QuantityStepperProps> = ({
                     },
                 }}
             >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="12"
-                    height="12"
-                    fill="none"
-                >
-                    <path fill={theme.colors.gray[10]} d="M7 0H5v5H0v2h5v5h2V7h5V5H7z" />
-                </svg>
+                <PlusIcon color={theme.colors.gray[10]} />
             </ActionIcon>
         </Group>
     );
